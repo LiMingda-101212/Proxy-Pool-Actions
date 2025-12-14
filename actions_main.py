@@ -1,6 +1,18 @@
 # -*- coding: utf-8 -*-
-# V2.3
-# 云端部署精简版
+#
+# ******************************************
+# Copyright (c) 2025 李明达. All rights reserved.
+#
+# project: ProxyPool
+# actions_main.py
+# V1.0
+# written by LiMingda <lmd101212@outlook.com>
+# 2025-12-13
+#
+# This software is for personal, non-commercial use only.
+# Unauthorized commercial use is prohibited.
+# 本代码仅供个人学习使用，未经许可不得商用。
+#*******************************************
 # 格式支持: 类型,代理,分数,是否支持中国,是否支持国际,是否为透明代理,检测到的IP
 #          Type,Proxy:Port,Score,China,International,Transparent,DetectedIP
 
