@@ -454,7 +454,7 @@ def load_proxies_from_file(file_path):
     with open(file_path, 'r', encoding="utf-8") as file:
         reader = csv.reader(file)
         for row in reader:
-            if len(row) >= 9:
+            if len(row) >= 6:
                 # 格式: 类型,proxy:port,分数,China,International,Transparent,DetectedIP
                 proxy_type = row[0].strip().lower()
                 proxy = row[1].strip()
