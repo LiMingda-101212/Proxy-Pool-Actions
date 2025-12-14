@@ -1,0 +1,76 @@
+{
+  "main": {
+    "output_file": "../ProxyPool/proxies.csv",
+    "test_url_cn": "http://www.baidu.com",
+    "test_url_intl": "http://www.google.com",
+    "test_url_info": "http://ipinfo.io/json",
+    "test_url_transparent": [
+      "http://httpbin.org/ip",
+      "https://ipinfo.io/ip"
+    ],
+    "test_urls_safety": {
+      "html": "http://httpbin.org/html",
+      "json": "http://httpbin.org/json",
+      "https": "https://httpbin.org/get",
+      "headers": "http://httpbin.org/headers",
+      "delay": "http://httpbin.org/delay/1",
+      "base64": "http://httpbin.org/base64/SGVsbG8gV29ybGQ=",
+      "ip_test": "http://httpbin.org/ip"
+    },
+    "test_url_browser": "https://httpbin.org/ip",
+    "check_transparent": "True",
+    "get_ip_info": "True",
+    "high_score_agency_scope": 98,
+    "timeout_cn": 6,
+    "timeout_intl": 10,
+    "timeout_transparent": 8,
+    "timeout_ipinfo": 8,
+    "timeout_safety": 10,
+    "timeout_browser": 30,
+    "max_workers": 200,
+    "max_score": 100,
+    "own_ip": "27.218.2.248"
+  },
+  "interrupt": {
+    "interrupt_dir": "../ProxyPool/interrupt",
+    "interrupt_file_crawl": "interrupted_crawl_proxies.csv",
+    "interrupt_file_load": "interrupted_load_proxies.csv",
+    "interrupt_file_existing": "interrupted_existing_proxies.csv",
+    "interrupt_file_browser": "interrupted_browser_proxies.csv",
+    "interrupt_file_safety": "interrupted_safety_proxies.csv"
+  },
+  "github": {
+    "token": "xxx"
+  },
+  "actions": {
+    "output_file": "proxies.csv",
+    "test_url_cn": "http://www.baidu.com",
+    "test_url_intl": "http://www.google.com",
+    "test_url_transparent": [
+      "http://httpbin.org/ip",
+      "http://ipinfo.io/ip"
+    ],
+    "test_url_info": "http://ipinfo.io/json",
+    "test_urls_safety": {
+      "html": "http://httpbin.org/html",
+      "json": "http://httpbin.org/json",
+      "https": "https://httpbin.org/get",
+      "headers": "http://httpbin.org/headers",
+      "delay": "http://httpbin.org/delay/1",
+      "base64": "http://httpbin.org/base64/SGVsbG8gV29ybGQ=",
+      "ip_test": "http://httpbin.org/ip"
+    },
+    "test_url_browser": "https://httpbin.org/ip",
+    "check_transparent": "True",
+    "get_ip_info": "True",
+    "high_score_agency_scope": 98,
+    "timeout_cn": 6,
+    "timeout_intl": 10,
+    "timeout_transparent": 8,
+    "timeout_ipinfo": 8,
+    "timeout_safety": 10,
+    "timeout_browser": 30,
+    "max_workers": 100,
+    "max_score": 100
+  }
+}
