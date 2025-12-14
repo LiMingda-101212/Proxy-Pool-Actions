@@ -1,4 +1,4 @@
-# 🌐 ProxyPool-Actions
+# 🌐 ProxyPool
 
 `代理池管理项目`
 
@@ -13,7 +13,7 @@
 ```
 🛠️ProxyPool项目结构
 
-├── <云端 Github Actions> Proxy-Pool/
+├── <云端 Github Actions> Proxy-Pool-Actions/
 │      ├── actions_main.py
 │      ├── proxies.csv
 │      ├── README.md
@@ -38,11 +38,11 @@
              └── config.json
 ```
 
-## 🎯当前仓库:云端代码 actions_main.py
+## 🎯云端代码 actions_main.py
 
 `github actions代理自动管理`
 
-负责与开发者本地代理池对接,由于actions耗时长,所以放在本公开仓库内
+负责与开发者本地代理池对接,由于actions耗时长,所以放在一个[公开仓库](https://github.com/LiMingda-101212/Proxy-Pool-Actions)内
 
 ### Workflows工作流
 
@@ -52,10 +52,10 @@
 ### Actions当前状态
 
 爬取并验证新代理
-![Proxy Pool Update](https://github.com/LiMingda-101212/Proxy-Pool/actions/workflows/Crawl-and-verify-new-proxies.yml/badge.svg)
+![Proxy Pool Update](https://github.com/LiMingda-101212/Proxy-Pool-Actions/actions/workflows/Crawl-and-verify-new-proxies.yml/badge.svg)
 
 重新验证已有代理
-![Proxy Pool Update](https://github.com/LiMingda-101212/Proxy-Pool/actions/workflows/Update-existing-proxies.yml/badge.svg)
+![Proxy Pool Update](https://github.com/LiMingda-101212/Proxy-Pool-Actions/actions/workflows/Update-existing-proxies.yml/badge.svg)
 
 ### 更新 (云端 actions_main.py)
 
