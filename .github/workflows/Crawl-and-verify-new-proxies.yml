@@ -1,0 +1,78 @@
+name: Crawl and verify new proxies
+
+on:
+  schedule:
+    - cron: '0 2 * * *'  # 每天UTC时间2:00运行
+  workflow_dispatch:
+
+jobs:
+  crawl-and-verify-new-proxies:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    permissions:
+      contents: write
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        fetch-depth: 0
+        
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+        
+    - name: Install dependencies
+      run: |
+        pip install -i https://pypi.tuna.tsinghua.edu.cn/simple/ requests aiohttp PySocks
+        # 验证安装
+        python -c "import socks; print('PySocks 安装成功，SOCKS代理支持已启用')"
+        
+    - name: Configure Git
+      run: |
+        git config --global user.name "GitHub Actions"
+        git config --global user.email "actions@github.com"
+        
+    - name: Pull latest changes first
+      run: |
+        # 先拉取最新更改，确保工作流基于最新代码运行
+        git pull origin main
+        
+    - name: Run Crawl and verify new proxies
+      run: |
+        python actions_main.py crawl_and_verify_new_proxies
+        
+    - name: Check for remote changes
+      id: check_remote
+      run: |
+        # 检查在运行脚本期间是否有新的远程提交
+        git fetch origin
+        LOCAL=$(git rev-parse HEAD)
+        REMOTE=$(git rev-parse origin/main)
+        
+        if [ "$LOCAL" = "$REMOTE" ]; then
+          echo "has_remote_changes=false" >> $GITHUB_OUTPUT
+          echo "✅ 无远程更改，使用本地验证的 proxies.csv"
+        else
+          echo "has_remote_changes=true" >> $GITHUB_OUTPUT
+          echo "🔄 检测到远程更改，将使用远程版本"
+        fi
+        
+    - name: Pull and overwrite if conflicts
+      if: steps.check_remote.outputs.has_remote_changes == 'true'
+      run: |
+        # 放弃本地修改，使用远程最新版本
+        git reset --hard origin/main
+        echo "已使用远程最新版本覆盖本地修改"
+        
+    - name: Auto-commit proxy updates
+      if: steps.check_remote.outputs.has_remote_changes == 'false'
+      uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        repository: .
+        file_pattern: 'proxies.csv'
+        commit_message: '🤖 Crawl and verify new proxies'
+        commit_user_name: 'GitHub Actions'
+        commit_user_email: 'actions@github.com'
