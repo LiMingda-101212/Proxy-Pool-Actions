@@ -5,14 +5,16 @@
 #
 # project: ProxyPool
 # actions_main.py
-# V1.0
+# V1.1
 # written by LiMingda <lmd101212@outlook.com>
-# 2025-12-13
+# 2025-12-20
 #
 # This software is for personal, non-commercial use only.
 # Unauthorized commercial use is prohibited.
 # 本代码仅供个人学习使用，未经许可不得商用。
 #*******************************************
+
+# 云端部署精简版
 # 格式支持: 类型,代理,分数,是否支持中国,是否支持国际,是否为透明代理,检测到的IP
 #          Type,Proxy:Port,Score,China,International,Transparent,DetectedIP
 
@@ -1110,6 +1112,5 @@ if __name__ == '__main__':
                 else:
                     validate_new_proxies(new_proxies, "auto")
 
-    elif parameter[0] == "xxx":
-        print("[info] === 开始验证已有代理安全性 ===")
-        print("开发中")
+    else:
+        print("[error] 非合法参数")
