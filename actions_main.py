@@ -510,8 +510,16 @@ def save_valid_proxies(proxies, proxy_types, china_support, international_suppor
                 china = china_support.get(proxy, False)
                 international = international_support.get(proxy, False)
                 transparent = transparent_proxies.get(proxy, False)
+                
                 # 单独处理detected_ip
                 detected_ip = detected_ips.get(proxy, "unknown")
+                # 限制detected_ip字段长度，并过滤无效响应
+                if detected_ip and len(detected_ip) > 50:
+                    # 如果是HTML或其他无效响应，标记为简短的错误信息
+                    if detected_ip.startswith("<!DOCTYPE html") or "html" in detected_ip.lower():
+                        detected_ip = "unknown"
+                    elif len(detected_ip) > 500:
+                        detected_ip = "unknown"
                 # 过滤无效响应
                 try:
                     # 如果是字符串但看起来像JSON，unknown
