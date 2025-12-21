@@ -512,28 +512,15 @@ def save_valid_proxies(proxies, proxy_types, china_support, international_suppor
                 transparent = transparent_proxies.get(proxy, False)
                 # 单独处理detected_ip
                 detected_ip = detected_ips.get(proxy, "unknown")
-                # 限制detected_ip字段长度，并过滤无效响应
-                if detected_ip and len(detected_ip) > 50:
-                    # 如果是HTML或其他无效响应，标记为简短的错误信息
-                    if detected_ip.startswith("<!DOCTYPE html") or "html" in detected_ip.lower():
-                        detected_ip = "invalid_html_response"
-                    elif len(detected_ip) > 500:
-                        detected_ip = detected_ip[:500] + "...[truncated]"
-
+                # 过滤无效响应
                 try:
-                    # 如果是字典，直接格式化为JSON
-                    if isinstance(detected_ip, dict):
-                        detected_ip = json.dumps(detected_ip, indent=2, ensure_ascii=False)
-
-                    # 如果是字符串但看起来像JSON，尝试解析并重新格式化
+                    # 如果是字符串但看起来像JSON，unknown
                     if isinstance(detected_ip, str) and detected_ip.startswith('{') and detected_ip.endswith('}'):
-                        # 处理双引号转义问题
-                        normalized_str = detected_ip.replace('""', '"')
-                        parsed_dict = json.loads(normalized_str)
-                        detected_ip = json.dumps(parsed_dict, indent=2, ensure_ascii=False)
+                        # 处理
+                        detected_ip = "unknown"
 
                 except Exception as e:
-                    print(f"[warning] 格式化detected_ip失败: {e}, 保持原样")
+                    print(f"[warning] 筛选detected_ip失败: {e}, 保持原样")
 
                 writer.writerow(
                     [proxy_type, proxy, score, china, international, transparent, detected_ip])
