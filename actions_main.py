@@ -5,9 +5,8 @@
 #
 # project: ProxyPool
 # actions_main.py
-# V1.1
 # written by LiMingda <lmd101212@outlook.com>
-# 2025-12-20
+# 2025-12-14
 #
 # This software is for personal, non-commercial use only.
 # Unauthorized commercial use is prohibited.
