@@ -1,12 +1,47 @@
 # 🌐 ProxyPool
 
+---
+
 `代理池管理项目`
 
-## 🎯总述:
+## **注意:这是主代码的云端仓库,负责与主代码对接,以下内容为主代码说明**
 
-### 项目结构
+一个功能全面的代理池管理系统，支持代理采集、验证、管理、安全检测和自动维护。
 
-本项目包含两部分,分别为`开发者本地一份完全版代码`和`云端公开仓库的actions自动管理代码`
+1. 总述
+2. 快速开始
+3. 代码介绍
+4. 更新
+5. 备注
+
+---
+
+## 1.总述:
+
+### ✨ 特性
+
+#### 🚀 核心功能
+- **智能代理采集**：支持网页爬取和本地文件导入
+- **多重验证机制**：基础连通性、浏览器可用性、安全性验证
+- **透明代理检测**：自动识别会泄露真实IP的代理
+- **智能评分系统**：根据代理稳定性动态评分（0-100分）
+- **中断恢复**：支持验证过程中断后继续
+- **自动维护**：云端GitHub Actions自动更新代理池
+
+#### 🔧 技术特性
+- **多协议支持**：HTTP/HTTPS/SOCKS4/SOCKS5
+- **异步验证**：高性能异步验证，支持并发
+- **SQLite存储**：轻量级数据库，完整代理信息记录
+- **Web API**：提供RESTful API接口
+- **跨平台**：支持Windows/macOS/Linux
+
+---
+
+### 📁 项目结构
+
+本项目包含两部分,分别为`部署在本地的完全版代码`和`云端公开仓库的actions自动管理代码`
+
+**注意:云端代码已经放入本仓库的cloud_deployment文件夹下**
 
 ```
 ProxyPool
@@ -21,7 +56,7 @@ ProxyPool
 │                      ├── Crawl-and-verify-new-proxies.yml
 │                      └── Update-existing-proxies.yml
 │
-└── <开发者本地 Local> ProxyPool/
+└── <本地 Local> ProxyPool/
         ├── main.py                    # 主入口
         │
         ├── core/                      # 核心模块
@@ -73,22 +108,169 @@ ProxyPool
             └── *.csv
 ```
 
-### 备注
+---
 
-爬虫部分仅供学习参考使用
+## 🚀 2.快速开始
 
-## 🎯云端代码 (actions_main.py)
+### 环境要求
+- Python 3.8 或更高版本
+- 推荐使用虚拟环境
+
+### 安装步骤
+
+#### 从GitHub克隆
+
+**Linux/macOS:**
+```bash
+# 克隆仓库
+git clone https://github.com/LiMingda-101212/Proxy-Pool.git
+cd Proxy-Pool
+
+# 创建虚拟环境（可选）
+python3 -m venv venv
+source venv/bin/activate  # Linux/macOS
+# 或 venv\Scripts\activate  # Windows
+
+# 安装依赖
+pip install -r requirements.txt
+```
+
+**Windows:**
+```
+# 使用PowerShell或CMD
+git clone https://github.com/LiMingda-101212/Proxy-Pool.git
+cd Proxy-Pool
+
+# 创建虚拟环境（可选）
+python -m venv venv
+venv\Scripts\activate
+
+# 安装依赖
+pip install -r requirements.txt
+```
+
+### 运行
+```bash
+# 运行主程序
+python main.py
+# 或
+python3 main.py
+```
+
+项目自带必要的配置文件和数据库。
+
+---
+
+###  ☁️ 云端部署
+
+为了自动维护代理池，建议部署云端GitHub Actions：
+
+#### 部署步骤
+
+1. **创建新的GitHub仓库**（建议公开,因为不限时长）
+   ```bash
+   # 在本地创建新目录
+   mkdir Proxy-Pool-Actions
+   cd Proxy-Pool-Actions
+   
+   # 复制云端部署文件
+   cp -r ../Proxy-Pool/cloud_deployment/* .
+   
+   # 初始化Git仓库
+   git init
+   git add .
+   git commit -m "Initial commit: Proxy Pool Actions"
+   ```
+
+2. **推送到GitHub**
+   ```bash
+   # 添加远程仓库（替换为你的仓库URL）
+   git remote add origin https://github.com/你的用户名/你的仓库名.git
+   git branch -M main
+   git push -u origin main
+   ```
+
+3. **配置GitHub Token**
+   - 在GitHub上创建Personal Access Token（需要`repo`权限）
+   - 在本地程序的设置菜单中添加Token
+
+### GitHub Actions 工作流
+- **🕐 爬取新代理**：每天北京时间10-12点运行
+- **🔄 更新现有代理**：每天北京时间13-15点运行
+
+![Actions状态](https://github.com/LiMingda-101212/Proxy-Pool-Actions/actions/workflows/Crawl-and-verify-new-proxies.yml/badge.svg)
+![Actions状态](https://github.com/LiMingda-101212/Proxy-Pool-Actions/actions/workflows/Update-existing-proxies.yml/badge.svg)
+
+---
+
+### 📖 使用指南
+
+#### 主菜单功能
+
+1. **🔍 加载和验证新代理**
+   - 从网页爬取或本地文件导入
+   - 自动去重和格式检查
+   - 支持指定代理类型或自动检测
+   - 透明代理检测
+
+2. **🔄 验证代理池代理**
+   - 更新现有代理状态
+   - 动态调整评分（成功+分，失败-分）
+   - 中断恢复功能
+
+3. **🌐 浏览器可用性验证**
+   - 使用Playwright测试真实浏览器环境
+   - 检测浏览器兼容性问题
+
+4. **🛡️ 代理安全验证(开发中)**
+   - DNS劫持检测
+   - SSL证书验证
+   - 恶意内容检测
+
+5. **📤 提取代理**
+   - 按需求提取指定数量代理
+   - 支持筛选：类型、地区、分数、安全性
+   - 智能负载均衡
+
+6. **📊 查看代理池状态**
+   - 实时统计信息
+   - 分数分布图表
+   - 地区分布分析
+
+7. **☁️ 与云端代理池同步**
+   - 合并本地和云端代理池
+   - 格式自动转换
+
+8. **🔧 API服务**
+   - 启动/停止API服务器
+   - 支持多种获取方式
+   - 代理状态管理（空闲/忙碌/失效）
+
+9. **⚙️ 设置**
+   - 修改配置文件
+   - 设置GitHub Token
+   - 调整验证参数
+
+
+**备注:云端和本地同步的功能需要token,请在设置功能(setting)中添加**
+
+---
+
+## 3.代码介绍
+
+### 🎯云端代码 (actions_main.py)
 
 `github actions代理自动管理`
 
-负责与开发者本地代理池对接,由于actions耗时长,所以放在一个[公开仓库<点这里查看>](https://github.com/LiMingda-101212/Proxy-Pool-Actions)内
+负责与开发者本地代理池对接,由于actions耗时长,所以建议放在一个[公开仓库<点这里查看本项目使用的云端仓库>](https://github.com/LiMingda-101212/Proxy-Pool-Actions)内
 
-### Workflows工作流
+
+#### Workflows工作流
 
 1. 爬取并验证新代理,每天北京时间10-12点运行 - UTC+2
 2. 重新验证已有代理,每天北京时间13-15点运行 - UTC+5
 
-### Actions当前状态
+#### Actions当前状态
 
 爬取并验证新代理
 ![Proxy Pool Update](https://github.com/LiMingda-101212/Proxy-Pool-Actions/actions/workflows/Crawl-and-verify-new-proxies.yml/badge.svg)
@@ -97,7 +279,7 @@ ProxyPool
 ![Proxy Pool Update](https://github.com/LiMingda-101212/Proxy-Pool-Actions/actions/workflows/Update-existing-proxies.yml/badge.svg)
 
 
-## 🎯开发者本地主代码 (main.py)
+### 🎯开发者本地主代码 (main.py)
 
 `代理自动管理`
 
@@ -113,7 +295,7 @@ ProxyPool
 - 9 .设置菜单,不用每次手动改`config.json`文件
 - 10.帮助菜单,,提供帮助信息
 
-## 🎯代理池
+### 🎯代理池
 
 云端代理池文件(proxies.csv)介绍(存储基本信息,云端便携版)：
 
@@ -183,7 +365,9 @@ proxy_usage 使用记录表:
 
 ```
 
-## 更新
+---
+
+## 📈 4.更新
 
 ### (主代码 main.py )
 
@@ -210,7 +394,7 @@ proxy_usage 使用记录表:
     本版本主代码代理池格式: 代理,分数,代理信息dict
 2025-12-20 : 将程序改为标准代理池,添加了api运行入口,开放多个url用于不同用途的调用.为了防止一个代理在不同爬虫被多次使用,使用了代理状态,未调用时"idle",调用获取会使状态变为"busy",失败会变为"dead"并很快会被清理.
 2025-12-21 : 将代理池迁移到SQLite中,围绕数据库进行了改动
-2025-01-11 : 将一个main文件分成多个模块,分别实现不同功能
+2026-01-11 : 将一个main文件分成多个模块,分别实现不同功能
 ```
 
 ### (云端 actions_main.py)
@@ -222,3 +406,76 @@ proxy_usage 使用记录表:
     云端代码格式: 类型,代理,分数,是否支持中国,是否支持国际,是否为透明代理,检测到的IP
 ```
 
+---
+
+## 5.备注
+
+---
+
+### 📞 支持与反馈
+
+- 📧 问题反馈：GitHub Issues
+
+- 💬 讨论区：GitHub Discussions
+
+- ⭐ 如果喜欢本项目，请给个`Star`！
+
+---
+
+### 🔒 免责声明
+
+关于爬虫功能
+
+**重要声明：**
+
+本项目中的爬虫功能仅用于学习和研究目的。使用者应：
+
+- 遵守法律法规：确保在合法范围内使用爬虫功能
+- 尊重网站规则：遵守目标网站的 robots.txt 协议和服务条款
+- 控制请求频率：避免对目标网站造成过大压力
+- 明确使用目的：不得用于非法或不道德的活动
+
+**开发者声明**
+
+本项目开发者不对以下行为负责：
+
+- 用户违反法律法规使用本项目
+- 用户侵犯第三方权益的行为
+- 因使用代理造成的任何损失或法律问题
+
+**建议与警告**
+
+🔸 仅使用公开可用的代理源
+
+🔸 不要爬取受版权保护的内容
+
+🔸 避免爬取个人隐私信息
+
+🔸 建议在爬取前获取网站许可
+
+**用户需自行承担使用本项目的所有风险。**
+
+---
+
+### 🙏 致谢
+
+感谢所有开源项目的贡献者，特别是：
+
+- [requests](https://github.com/psf/requests) - HTTP库
+- [aiohttp](https://github.com/aio-libs/aiohttp) - 异步HTTP库
+- [playwright-python](https://github.com/microsoft/playwright-python) - 浏览器自动化
+
+---
+
+### 📄 开源协议
+
+本项目采用 GNU General Public License v3.0 (GPL v3) 开源协议。
+
+主要条款：
+
+- 自由使用：可以自由使用、复制、分发本项目
+- 开源要求：修改本项目后，必须以相同协议开源
+- 免责声明：不提供任何担保
+- 完整协议内容请查看 [LICENSE](LICENSE) 文件。
+
+---
