@@ -94,7 +94,7 @@ def get_own_ip(max_retries=5, retry_delay=2):
                 response = requests.get(service, timeout=timeout, headers=HEADERS)
 
                 if response.status_code == 200:
-                    if service == "http://httpbin.org/ip":
+                    if service == "https://httpbin.org/ip":
                         # httpbin返回JSON格式
                         ip_data = response.json()
                         ip = ip_data.get('origin')
@@ -194,7 +194,7 @@ def check_transparent_proxy(proxy, proxy_type="http", own_ip=None):
         )
 
         if response.status_code == 200:
-            if url == "http://httpbin.org/ip":
+            if url == "https://httpbin.org/ip":
                 # httpbin返回JSON格式
                 proxy_ip_data = response.json()
                 proxy_ip = proxy_ip_data.get('origin')
@@ -1039,20 +1039,20 @@ def load_settings():
     config = {
         "actions": {
             "output_file": "proxies.csv",
-            "test_url_cn": "http://www.baidu.com",
-            "test_url_intl": "http://www.google.com",
+            "test_url_cn": "https://www.baidu.com",
+            "test_url_intl": "https://www.google.com",
             "test_url_transparent": [
-                "http://httpbin.org/ip",
-                "http://ipinfo.io/ip"
+                "https://httpbin.org/ip",
+                "https://ipinfo.io/ip"
             ],
             "test_urls_safety": {
-                "html": "http://httpbin.org/html",
-                "json": "http://httpbin.org/json",
+                "html": "https://httpbin.org/html",
+                "json": "https://httpbin.org/json",
                 "https": "https://httpbin.org/get",
-                "headers": "http://httpbin.org/headers",
-                "delay": "http://httpbin.org/delay/1",
-                "base64": "http://httpbin.org/base64/SGVsbG8gV29ybGQ=",
-                "ip_test": "http://httpbin.org/ip"
+                "headers": "https://httpbin.org/headers",
+                "delay": "https://httpbin.org/delay/1",
+                "base64": "https://httpbin.org/base64/SGVsbG8gV29ybGQ=",
+                "ip_test": "https://httpbin.org/ip"
             },
             "test_url_browser": "https://httpbin.org/ip",
             "check_transparent": "True",
