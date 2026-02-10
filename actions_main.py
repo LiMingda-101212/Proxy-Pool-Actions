@@ -1,17 +1,24 @@
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-#
-# ******************************************
-# Copyright (c) 2025 李明达. All rights reserved.
-#
-# project: ProxyPool
-# actions_main.py
-# written by LiMingda <lmd101212@outlook.com>
-# 2025-12-14
-#
-# This software is for personal, non-commercial use only.
-# Unauthorized commercial use is prohibited.
-# 本代码仅供个人学习使用，未经许可不得商用。
-#*******************************************
+"""
+ProxyPool - 高效代理池管理工具
+Copyright (C) 2026  李明达
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+Contact: lmd101212@outlook.com
+"""
 
 # 云端部署精简版
 # 格式支持: 类型,代理,分数,是否支持中国,是否支持国际,是否为透明代理,检测到的IP
