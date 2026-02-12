@@ -134,6 +134,60 @@ def get_own_ip(max_retries=5, retry_delay=2):
     print("[error] 无法获取本机IP地址，透明代理检测将不可用")
     return None
 
+# 设置代理
+def set_up_proxy(proxy, proxy_type="http"):
+    r"""
+    设置代理
+
+    if proxy_type == "http":
+        proxies_config = {
+            "http": f"http://{proxy}",
+            "https": f"http://{proxy}"
+        }
+    elif proxy_type == "socks4":
+        proxies_config = {
+            "http": f"socks4://{proxy}",
+            "https": f"socks4://{proxy}"
+        }
+    elif proxy_type == "socks5":
+        proxies_config = {
+            "http": f"socks5://{proxy}",
+            "https": f"socks5://{proxy}"
+        }
+    else:
+        proxies_config = {
+            "http": f"http://{proxy}",
+            "https": f"http://{proxy}"
+        }
+
+    :param proxy: 代理地址
+    :param proxy_type: 代理类型
+    :return: proxy_ip_info
+    """
+
+    if proxy_type == "http":
+        proxies_config = {
+            "http": f"http://{proxy}",
+            "https": f"http://{proxy}"
+        }
+    elif proxy_type == "socks4":
+        proxies_config = {
+            "http": f"socks4://{proxy}",
+            "https": f"socks4://{proxy}"
+        }
+    elif proxy_type == "socks5":
+        proxies_config = {
+            "http": f"socks5://{proxy}",
+            "https": f"socks5://{proxy}"
+        }
+    else:
+        proxies_config = {
+            "http": f"http://{proxy}",
+            "https": f"http://{proxy}"
+        }
+
+    return proxies_config
+
 
 # 验证IP地址格式是否有效
 def is_valid_ip(ip):
@@ -169,26 +223,7 @@ def check_transparent_proxy(proxy, proxy_type="http", own_ip=None):
     """
     try:
         # 设置代理
-        if proxy_type == "http":
-            proxies_config = {
-                "http": f"http://{proxy}",
-                "https": f"http://{proxy}"
-            }
-        elif proxy_type == "socks4":
-            proxies_config = {
-                "http": f"socks4://{proxy}",
-                "https": f"socks4://{proxy}"
-            }
-        elif proxy_type == "socks5":
-            proxies_config = {
-                "http": f"socks5://{proxy}",
-                "https": f"socks5://{proxy}"
-            }
-        else:
-            proxies_config = {
-                "http": f"http://{proxy}",
-                "https": f"http://{proxy}"
-            }
+        proxies_config = set_up_proxy(proxy, proxy_type)
 
         # 避免总是使用同一个服务
         url = random.choice(current_config["actions"]["test_url_transparent"])
@@ -243,26 +278,8 @@ def check_proxy_single(proxy, test_url, timeout, retries=1, proxy_type="auto"):
     detected_type = proxy_type if proxy_type != "auto" else "unknown"
 
     for current_protocol in protocols_to_try:
-        if current_protocol == "http":
-            proxies_config = {
-                "http": f"http://{proxy}",
-                "https": f"http://{proxy}"
-            }
-        elif current_protocol == "socks4":
-            proxies_config = {
-                "http": f"socks4://{proxy}",
-                "https": f"socks4://{proxy}"
-            }
-        elif current_protocol == "socks5":
-            proxies_config = {
-                "http": f"socks5://{proxy}",
-                "https": f"socks5://{proxy}"
-            }
-        else:
-            proxies_config = {
-                "http": f"http://{proxy}",
-                "https": f"http://{proxy}"
-            }
+        # 设置代理
+        proxies_config = set_up_proxy(proxy, proxy_type)
 
         for attempt in range(retries):
             try:
@@ -280,8 +297,10 @@ def check_proxy_single(proxy, test_url, timeout, retries=1, proxy_type="auto"):
                     # 超时，继续下一个协议（如果是自动检测）
                     break
 
-                # if 200 <= response.status_code < 400:   # 接受200-400,较宽松
-                if response.status_code == 200:  # 只接受200,严格
+                # if 200 <= response.status_code < 400:   # 接受200-400,宽松
+                # if 200 <= response.status_code < 300:   # 接受200-300,较宽松
+                # if response.status_code in [200, 204]:  # 只接受200或204,严格
+                if response.status_code  == 204:  # 使用204站点,只接受204,严格
                     detected_type = current_protocol  # 类型
                     return True, response_time, detected_type
 
@@ -310,13 +329,15 @@ def check_proxy_dual(proxy, proxy_type="auto", own_ip=None):
     :return: (是否通过国内, 是否通过国际, 最终检测类型, 是否为透明代理, 检测到的IP)
     """
     # 验证国内网站
+    url_cn = random.choice(current_config["actions"]["test_url_cn"])   # 避免总是使用同一个服务
     cn_success, cn_response_time, detected_type_cn = check_proxy_single(
-        proxy, current_config["actions"]["test_url_cn"], current_config["actions"]["timeout_cn"], 1, proxy_type
+        proxy, url_cn, current_config["actions"]["timeout_cn"], 1, proxy_type
     )
 
     # 验证国际网站
+    url_intl = random.choice(current_config["actions"]["test_url_intl"])  # 避免总是使用同一个服务
     intl_success, intl_response_time, detected_type_intl = check_proxy_single(
-        proxy, current_config["actions"]["test_url_intl"], current_config["actions"]["timeout_intl"], 1, proxy_type
+        proxy, url_intl, current_config["actions"]["timeout_intl"], 1, proxy_type
     )
 
     # 使用第一个成功的检测类型，或者第一个检测类型
@@ -516,7 +537,7 @@ def save_valid_proxies(proxies, proxy_types, china_support, international_suppor
                 china = china_support.get(proxy, False)
                 international = international_support.get(proxy, False)
                 transparent = transparent_proxies.get(proxy, False)
-                
+
                 # 单独处理detected_ip
                 detected_ip = detected_ips.get(proxy, "unknown")
                 # 限制detected_ip字段长度，并过滤无效响应
@@ -1044,34 +1065,45 @@ def load_settings():
     """加载设置"""
     # 默认配置
     config = {
-        "actions": {
-            "output_file": "proxies.csv",
-            "test_url_cn": "https://www.baidu.com",
-            "test_url_intl": "https://www.google.com",
-            "test_url_transparent": [
-                "https://httpbin.org/ip",
-                "https://ipinfo.io/ip"
-            ],
-            "test_urls_safety": {
-                "html": "https://httpbin.org/html",
-                "json": "https://httpbin.org/json",
-                "https": "https://httpbin.org/get",
-                "headers": "https://httpbin.org/headers",
-                "delay": "https://httpbin.org/delay/1",
-                "base64": "https://httpbin.org/base64/SGVsbG8gV29ybGQ=",
-                "ip_test": "https://httpbin.org/ip"
-            },
-            "test_url_browser": "https://httpbin.org/ip",
-            "check_transparent": "True",
-            "high_score_agency_scope": 98,
-            "timeout_cn": 6,
-            "timeout_intl": 10,
-            "timeout_transparent": 8,
-            "timeout_safety": 10,
-            "timeout_browser": 30,
-            "max_workers": 100,
-            "max_score": 100
-        }
+      "actions": {
+        "output_file": "proxies.csv",
+        "test_url_cn": [
+          "https://connect.rom.miui.com/generate_204",
+          "https://www.qualcomm.cn/generate_204"
+        ],
+        "test_url_intl": [
+          "https://www.google.com/generate_204",
+          "https://mail.google.com/generate_204",
+          "https://play.google.com/generate_204",
+          "https://accounts.google.com/generate_204"
+        ],
+        "test_url_transparent": [
+          "https://httpbin.org/ip",
+          "https://ipinfo.io/ip"
+        ],
+        "test_url_info": "https://ipinfo.io/json",
+        "test_urls_safety": {
+          "html": "https://httpbin.org/html",
+          "json": "https://httpbin.org/json",
+          "https": "https://httpbin.org/get",
+          "headers": "https://httpbin.org/headers",
+          "delay": "https://httpbin.org/delay/1",
+          "base64": "https://httpbin.org/base64/SGVsbG8gV29ybGQ=",
+          "ip_test": "https://httpbin.org/ip"
+        },
+        "test_url_browser": "https://httpbin.org/ip",
+        "check_transparent": "True",
+        "get_ip_info": "True",
+        "high_score_agency_scope": 98,
+        "timeout_cn": 6,
+        "timeout_intl": 10,
+        "timeout_transparent": 8,
+        "timeout_ipinfo": 8,
+        "timeout_safety": 10,
+        "timeout_browser": 30,
+        "max_workers": 100,
+        "max_score": 100
+      }
     }
     try:
         with open("data/config.json", "r", encoding="utf-8") as f:
