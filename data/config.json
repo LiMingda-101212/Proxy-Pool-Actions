@@ -1,8 +1,16 @@
 {
   "main": {
-    "db_file": "./proxies.db",
-    "test_url_cn": "https://www.baidu.com",
-    "test_url_intl": "https://www.google.com",
+    "db_file": "./data/proxies.db",
+    "test_url_cn": [
+      "https://connect.rom.miui.com/generate_204",
+      "https://www.qualcomm.cn/generate_204"
+    ],
+    "test_url_intl": [
+      "https://www.google.com/generate_204",
+      "https://mail.google.com/generate_204",
+      "https://play.google.com/generate_204",
+      "https://accounts.google.com/generate_204"
+    ],
     "test_url_info": "https://ipinfo.io/json",
     "test_url_transparent": [
       "https://httpbin.org/ip",
@@ -29,7 +37,7 @@
     "timeout_browser": 30,
     "max_workers": 200,
     "max_score": 100,
-    "own_ip": "27.218.2.248",
+    "own_ip": "112.234.83.252",
     "number_of_items_per_row": 5
   },
   "interrupt": {
@@ -45,8 +53,16 @@
   },
   "actions": {
     "output_file": "proxies.csv",
-    "test_url_cn": "https://www.baidu.com",
-    "test_url_intl": "https://www.google.com",
+    "test_url_cn": [
+      "https://connect.rom.miui.com/generate_204",
+      "https://www.qualcomm.cn/generate_204"
+    ],
+    "test_url_intl": [
+      "https://www.google.com/generate_204",
+      "https://mail.google.com/generate_204",
+      "https://play.google.com/generate_204",
+      "https://accounts.google.com/generate_204"
+    ],
     "test_url_transparent": [
       "https://httpbin.org/ip",
       "https://ipinfo.io/ip"
