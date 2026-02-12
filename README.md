@@ -123,7 +123,7 @@ ProxyPool
 **Linux/macOS:**
 ```bash
 # 克隆仓库
-git clone https://github.com/LiMingda-101212/Proxy-Pool.git
+git clone https://github.com/limingda1212/Proxy-Pool.git
 cd Proxy-Pool
 
 # 创建虚拟环境（可选）
@@ -138,7 +138,7 @@ pip install -r requirements.txt
 **Windows:**
 ```
 # 使用PowerShell或CMD
-git clone https://github.com/LiMingda-101212/Proxy-Pool.git
+git clone https://github.com/limingda1212/Proxy-Pool.git
 cd Proxy-Pool
 
 # 创建虚拟环境（可选）
