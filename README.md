@@ -139,7 +139,7 @@ pip install -r requirements.txt
 ```
 # 使用PowerShell或CMD
 git clone https://github.com/limingda1212/ProxyPool.git
-cd Proxy-Pool
+cd ProxyPool
 
 # 创建虚拟环境（可选）
 python -m venv venv
