@@ -1089,7 +1089,8 @@ def load_settings():
           "headers": "https://httpbin.org/headers",
           "delay": "https://httpbin.org/delay/1",
           "base64": "https://httpbin.org/base64/SGVsbG8gV29ybGQ=",
-          "ip_test": "https://httpbin.org/ip"
+          "dns_test_domain": "example.com",
+          "doh_server": "https://doh.pub/dns-query"
         },
         "test_url_browser": "https://httpbin.org/ip",
         "check_transparent": "True",
