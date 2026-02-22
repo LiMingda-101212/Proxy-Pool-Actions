@@ -124,7 +124,7 @@ ProxyPool
 ```bash
 # 克隆仓库
 git clone https://github.com/limingda1212/ProxyPool.git
-cd Proxy-Pool
+cd ProxyPool
 
 # 创建虚拟环境（可选）
 python3 -m venv venv
@@ -223,7 +223,7 @@ python3 main.py
    - 使用Playwright测试真实浏览器环境
    - 检测浏览器兼容性问题
 
-4. **🛡️ 代理安全验证(开发中)**
+4. **🛡️ 代理安全验证**
    - DNS劫持检测
    - SSL证书验证
    - 恶意内容检测
@@ -280,7 +280,7 @@ python3 main.py
 ![Proxy Pool Update](https://github.com/LiMingda-101212/Proxy-Pool-Actions/actions/workflows/Update-existing-proxies.yml/badge.svg)
 
 
-### 🎯开发者本地主代码 (main.py)
+### 🎯开发者本地主代码
 
 `代理自动管理`
 
@@ -339,6 +339,8 @@ proxies 代理数据表:
         dns_hijacking TEXT,
         ssl_valid TEXT,
         malicious_content TEXT,
+        data_integrity TEXT
+        behavior_analysis TEXT
         security_check_date TEXT,
         avg_response_time REAL DEFAULT 0,
         success_rate REAL DEFAULT 0.0,
@@ -387,7 +389,7 @@ proxy_usage 使用记录表:
     支持透明代理检测功能，识别会泄露真实IP的代理.
     有中断恢复功能,当验证过程被中断时,会自动保存已完成的代理到代理池,未完成的代理保存到中断文件,下次可选择继续验证
     ✳️3.浏览器使用验证,用playwright检测出代理在真实浏览器环境中的可用性,有中断恢复功能可用代理
-    ✳️4.🛠️代理安全验证,检验代理安全性,已经实现基本代码,主函数开发中 - 开发中
+    ✳️4.代理安全验证,检验代理安全性 - V1.0.0开发,V2.2.0实现
     ✳️5.提取指定数量的代理,优先提取分数高,稳定的代理,可指定提取类型,支持范围,是否为透明代理,浏览器是否可用
     ✳️6.查看代理池状态(总代理数量,各种类型代理的分数分布情况,支持范围,浏览器是否可用统计)
     ✳️7.与部署在github上由actions自动维护的代理池合并,将github精简格式转为本地全面格式
@@ -399,6 +401,8 @@ proxy_usage 使用记录表:
 <V2.0.0> 2026-01-11 : 将一个main文件分成多个模块,分别实现不同功能
 <V2.1.0> 2026-02-12 : 将验证服务改成国际和国内的204服务
 <V2.1.1> 2026-02-13 : 项目改名叫ProxyPool(原名Proxy-Pool),版本号改用标准X.Y.Z格式
+<V2.2.0> 2026-02-21 : 完善代理安全性验证,补全代理池数据库的缺少列(data_integrity和behavior_analysis),代理安全性验证已可用,
+    提取功能添加安全性验证通过数量约束项,查看代理池状态功能添加安全性验证各项通过数量统计,并对数据库操作代码进行优化
 ```
 
 ### (云端 actions_main.py)
