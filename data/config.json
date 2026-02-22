@@ -23,7 +23,8 @@
       "headers": "https://httpbin.org/headers",
       "delay": "https://httpbin.org/delay/1",
       "base64": "https://httpbin.org/base64/SGVsbG8gV29ybGQ=",
-      "ip_test": "https://httpbin.org/ip"
+      "dns_test_domain": "example.com",
+      "doh_server": "https://doh.pub/dns-query"
     },
     "test_url_browser": "https://httpbin.org/ip",
     "check_transparent": "True",
@@ -35,7 +36,7 @@
     "timeout_ipinfo": 8,
     "timeout_safety": 10,
     "timeout_browser": 30,
-    "max_workers": 200,
+    "max_workers": 300,
     "max_score": 100,
     "own_ip": "112.234.83.252",
     "number_of_items_per_row": 5
@@ -49,7 +50,10 @@
     "interrupt_file_safety": "interrupted_safety_proxies.csv"
   },
   "github": {
-    "token": ""
+    "token": "",
+    "down_url": "https://raw.githubusercontent.com/LiMingda-101212/Proxy-Pool-Actions/refs/heads/main/proxies.csv",
+    "actions_repo_api": "https://api.github.com/repos/LiMingda-101212/Proxy-Pool-Actions",
+    "file_name": "proxies.csv"
   },
   "actions": {
     "output_file": "proxies.csv",
@@ -75,7 +79,8 @@
       "headers": "https://httpbin.org/headers",
       "delay": "https://httpbin.org/delay/1",
       "base64": "https://httpbin.org/base64/SGVsbG8gV29ybGQ=",
-      "ip_test": "https://httpbin.org/ip"
+      "dns_test_domain": "example.com",
+      "doh_server": "https://doh.pub/dns-query"
     },
     "test_url_browser": "https://httpbin.org/ip",
     "check_transparent": "True",
