@@ -22117,3 +22117,11 @@ http,37.27.134.55:3128,97,False,False,False,37.27.134.55
 socks5,45.74.31.40:12950,97,False,False,False,50.6.207.27
 socks5,85.217.171.80:9051,97,False,False,False,unknown
 socks5,103.197.241.90:1080,97,False,False,False,unknown
+http,137.66.56.136:8080,98,True,False,False,64.34.84.125
+http,38.158.83.241:999,98,False,True,False,unknown
+socks5,199.247.18.115:9050,98,True,True,False,unknown
+socks5,134.65.245.71:9050,98,True,True,False,unknown
+socks5,213.171.26.67:8008,98,False,True,False,unknown
+socks5,193.43.149.54:1080,98,False,True,False,unknown
+socks5,103.242.105.199:8199,98,False,True,False,unknown
+socks5,168.138.9.147:1080,98,False,True,False,unknown
