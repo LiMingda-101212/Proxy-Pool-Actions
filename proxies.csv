@@ -18747,3 +18747,11 @@ http,41.217.220.214:32650,97,False,False,False,unknown
 http,222.252.14.70:8443,97,False,False,False,unknown
 socks5,82.200.30.126:11080,97,False,False,False,unknown
 socks5,176.35.25.216:1080,97,False,False,False,176.35.25.216
+http,178.252.171.226:8080,98,False,True,False,unknown
+http,179.1.48.44:8080,98,False,True,False,unknown
+http,45.224.149.77:999,98,False,True,False,unknown
+http,41.254.48.190:1976,98,True,False,False,unknown
+http,31.202.84.127:38777,98,True,False,False,unknown
+http,103.22.99.90:1111,98,False,True,False,unknown
+http,138.117.85.217:999,98,False,True,False,unknown
+http,200.125.169.51:999,98,False,True,False,200.125.169.51
