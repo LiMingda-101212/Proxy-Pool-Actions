@@ -18008,3 +18008,14 @@ http,128.0.7.11:8080,97,False,False,False,unknown
 http,190.93.191.20:999,97,False,False,False,unknown
 http,106.51.185.233:8080,97,False,False,False,unknown
 socks5,120.133.82.62:44192,97,False,False,False,unknown
+http,182.160.100.142:12331,98,True,True,False,unknown
+http,38.49.152.198:999,98,False,True,False,unknown
+http,180.191.16.9:8085,98,False,True,False,unknown
+http,160.25.222.205:8181,98,False,True,False,unknown
+http,47.242.218.151:9012,98,False,True,False,unknown
+http,163.223.78.163:8080,98,True,False,False,unknown
+http,103.155.168.176:8299,98,False,True,False,unknown
+http,170.81.131.70:3128,98,False,True,False,170.81.128.50
+http,178.252.171.229:8080,98,False,True,False,unknown
+http,38.19.42.176:999,98,False,True,False,unknown
+socks5,85.122.120.46:30000,98,True,False,False,unknown
