@@ -17281,3 +17281,17 @@ http,103.164.229.149:8080,97,False,False,False,unknown
 http,89.135.59.71:8090,97,False,False,False,unknown
 socks5,101.2.166.73:1080,97,False,False,False,101.2.166.7
 socks5,213.176.113.24:50001,97,False,False,False,213.176.113.24
+http,45.198.10.82:8080,98,False,True,False,unknown
+http,222.127.206.145:8085,98,False,True,False,unknown
+http,103.244.107.90:3125,98,False,True,False,103.244.107.90
+http,45.133.107.64:81,98,False,True,False,unknown
+http,197.248.75.221:8103,98,False,True,False,unknown
+http,58.69.61.79:8082,98,False,True,False,58.69.61.79
+http,103.71.162.28:8181,98,False,True,False,unknown
+http,150.129.115.253:6666,98,False,True,False,unknown
+http,103.50.25.13:8888,98,True,False,False,unknown
+http,38.191.204.104:999,98,False,True,False,unknown
+http,129.213.162.27:17777,98,False,True,False,unknown
+http,89.43.132.250:8080,98,False,True,False,unknown
+http,103.133.25.119:8080,98,False,True,False,unknown
+http,129.205.198.122:8080,98,True,False,False,129.205.198.122
