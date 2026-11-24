@@ -17070,3 +17070,14 @@ http,38.191.42.202:999,97,False,False,False,unknown
 socks5,46.48.26.53:10808,97,False,False,False,83.141.83.140
 socks5,221.176.85.235:1080,97,False,False,False,unknown
 socks5,87.107.68.231:1081,97,False,False,False,unknown
+http,103.193.145.155:8080,98,False,True,False,103.193.145.155
+http,103.19.58.151:8080,98,False,True,False,unknown
+http,103.152.238.77:1080,98,False,True,False,103.152.238.77
+http,103.187.136.9:3838,98,False,True,False,unknown
+http,103.255.243.62:8080,98,False,True,False,112.78.34.254
+http,103.125.38.50:8080,98,False,True,False,unknown
+http,37.230.57.112:999,98,True,False,False,unknown
+http,170.106.188.46:5432,98,False,True,False,unknown
+http,112.198.128.171:8083,98,False,True,False,unknown
+http,24.119.238.146:10000,98,True,False,False,unknown
+http,38.58.117.181:3125,98,False,True,False,unknown
